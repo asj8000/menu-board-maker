@@ -1,4 +1,34 @@
+"use client";
+
+import { useState } from "react";
+
+import MenuList from "@/components/home/menu/menu-list";
+import MenuBoard from "@/components/home/menu/menu-board";
+
+const tabs = [
+  { id: 0, name: "전체" },
+  { id: 1, name: "기본 케어" },
+  { id: 2, name: "네일 아트" },
+  { id: 3, name: "젤 네일" },
+  { id: 4, name: "네일 리무버" },
+  { id: 5, name: "스페셜 케어" },
+];
+
+const menus = [];
+
+for (let i = 0; i < 100; i++) {
+  menus.push({
+    id: i,
+    name: `서비스 ${i + 1}`,
+    description: `서비스 ${i + 1} 설명`,
+    menuId: i % 6, // 5개의 다른 탭에 맞춰 순환
+    price: 30000 + i * 1000, // 가격은 예시로 설정
+    color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, // 랜덤 색상
+  });
+}
+
 export default function HomeComponent() {
+  const [selectedTab, setSelectedTab] = useState(0);
 
   return (
     <div className="w-screen h-screen overflow-hidden flex">
@@ -6,156 +36,24 @@ export default function HomeComponent() {
         <div className="p-8 h-1/6">
           <h1 className="text-3xl font-bold">가나다라 네일샵</h1>
           <div className="flex space-x-4 mt-4">
-            <div className="bg-[#e6f7ff]">손가락</div>
-            <div className="bg-[#e6f7ff]">기본 케어</div>
-            <div className="bg-[#e6f7ff]">제거</div>
-            <div className="bg-[#e6f7ff]">컬러링</div>
-            <div className="bg-[#e6f7ff]">네일케어</div>
+            {tabs.map((tab) => (
+              <div
+                key={tab.id}
+                className={`${
+                  selectedTab === tab.id ? "border-b-2 border-black" : ""
+                }`}
+                onClick={() => setSelectedTab(tab.id)}
+              >
+                {tab.name}
+              </div>
+            ))}
           </div>
         </div>
-        <div className="h-5/6 overflow-y-scroll">
-          <div className="grid grid-cols-4 gap-4 p-4 bg-gray-200 ">
-            <div className="bg-[#ccf2ff] rounded-xl p-4 ">
-              <div>
-                <p>손 기본 케어</p>
-                <p>케어 + 컬러링 + 영양제</p>
-                <p>가나다라네일샵</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ccf2ff] rounded-xl p-4">
-              <div>
-                <p>손 컬러링</p>
-                <p>이제 색을 입혀보아요</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ccf2ff] rounded-xl p-4">
-              <div>
-                <p>손 기본 케어</p>
-                <p>케어</p>
-                <p>가나다라네일샵</p>
-                <p>+ 영양제</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ccf2ff] rounded-xl p-4">
-              <div>
-                <p>손 기본 케어</p>
-                <p>케어</p>
-                <p>가나다라네일샵</p>
-                <p>+ 영양제</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ccf2ff] rounded-xl p-4">
-              <div>
-                <p>손 기본 케어</p>
-                <p>케어</p>
-                <p>가나다라네일샵</p>
-                <p>+ 영양제</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ccf2ff] rounded-xl p-4">
-              <div>
-                <p>손 기본 케어</p>
-                <p>케어</p>
-                <p>가나다라네일샵</p>
-                <p>+ 영양제</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ccf2ff] rounded-xl p-4">
-              <div>
-                <p>손 기본 케어</p>
-                <p>케어</p>
-                <p>가나다라네일샵</p>
-                <p>+ 영양제</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ffd6cc] rounded-xl p-4">
-              <div>
-                <p>제거</p>
-                <p className="mt-4">0원</p>
-              </div>
-            </div>
-            <div className="bg-[#fffacc] rounded-xl p-4">
-              <div>
-                <p>손 연장</p>
-                <p>실물과 맞는 매치지</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#fffacc] rounded-xl p-4">
-              <div>
-                <p>손님맞춤</p>
-                <p>bts 노래추천</p>
-                <p>실물과 맞는 매치지</p>
-                <p>컬러링</p>
-                <p>제거</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ffd6cc] rounded-xl p-4">
-              <div>
-                <p>제거</p>
-                <p className="mt-4">0원</p>
-              </div>
-            </div>
-            <div className="bg-[#fffacc] rounded-xl p-4">
-              <div>
-                <p>손 연장</p>
-                <p>실물과 맞는 매치지</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#fffacc] rounded-xl p-4">
-              <div>
-                <p>손님맞춤</p>
-                <p>bts 노래추천</p>
-                <p>실물과 맞는 매치지</p>
-                <p>컬러링</p>
-                <p>제거</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#ffd6cc] rounded-xl p-4">
-              <div>
-                <p>제거</p>
-                <p className="mt-4">0원</p>
-              </div>
-            </div>
-            <div className="bg-[#fffacc] rounded-xl p-4">
-              <div>
-                <p>손 연장</p>
-                <p>실물과 맞는 매치지</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#fffacc] rounded-xl p-4">
-              <div>
-                <p>손님맞춤</p>
-                <p>bts 노래추천</p>
-                <p>실물과 맞는 매치지</p>
-                <p>컬러링</p>
-                <p>제거</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-            <div className="bg-[#fffacc] rounded-xl p-4">
-              <div>
-                <p>손님맞춤</p>
-                <p>bts 노래추천</p>
-                <p>실물과 맞는 매치지</p>
-                <p>컬러링</p>
-                <p>제거</p>
-                <p className="mt-4">40,000원</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {selectedTab === 0 ? (
+          <MenuBoard menus={menus} />
+        ) : (
+          <MenuList menus={menus} selectedTab={selectedTab} />
+        )}
       </div>
       <div className="w-2/6 bg-[#f5f5f5] p-8 flex flex-col justify-between">
         <div className="mb-4">
@@ -209,6 +107,5 @@ export default function HomeComponent() {
         </div>
       </div>
     </div>
-  )
-
+  );
 }
