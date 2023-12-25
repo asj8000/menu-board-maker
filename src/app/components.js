@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import MenuList from "@/components/home/menu/menu-list";
 import MenuBoard from "@/components/home/menu/menu-board";
+import menuTempData from "@/data/menu-temp-data.json";
+import tabTempData from "@/data/tab-temp-data.json";
+import boardTempData from "@/data/board-temp-data.json";
 
 const tabs = [
   { id: 0, name: "전체" },
@@ -29,6 +32,9 @@ for (let i = 0; i < 100; i++) {
 
 export default function HomeComponent() {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [tabs, setTabs] = useState(tabTempData);
+  const [menus, setMenus] = useState(menuTempData);
+  const [boardLayout, setBoardLayout] = useState(boardTempData);
 
   return (
     <div className="w-screen h-screen overflow-hidden flex">
@@ -50,7 +56,7 @@ export default function HomeComponent() {
           </div>
         </div>
         {selectedTab === 0 ? (
-          <MenuBoard menus={menus} />
+          <MenuBoard menus={menus} boardLayout={boardLayout} />
         ) : (
           <MenuList menus={menus} selectedTab={selectedTab} />
         )}
