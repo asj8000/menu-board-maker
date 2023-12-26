@@ -1,10 +1,9 @@
-import Image from 'next/image'
-import HomeComponent from "@/app/components";
+import HomeComponent from "@/app/home/components";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen ">
       <HomeComponent />
     </main>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import formatNumberWithCommas from "src/utils/format-number-with-commas";
 
-export default function MenuBoard({ menus, boardLayout }) {
+export default function MenuBoard({ menus, boardLayout, onClickMenu }) {
   return (
     <div className="h-5/6 overflow-y-scroll bg-gray-200">
       <div className="grid grid-cols-5 gap-2.5 p-4 auto-rows-max">
@@ -16,6 +16,9 @@ export default function MenuBoard({ menus, boardLayout }) {
                 gridColumn: `${item.x} / span ${item.col}`,
                 gridRow: `${item.y} / span ${item.row}`,
                 backgroundColor: item.color,
+              }}
+              onClick={() => {
+                onClickMenu(item.id);
               }}
             >
               {menuItem ? (

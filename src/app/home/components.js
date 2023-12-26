@@ -4,37 +4,28 @@ import { useEffect, useState } from "react";
 
 import MenuList from "@/components/home/menu/menu-list";
 import MenuBoard from "@/components/home/menu/menu-board";
+import MenuModal from "@/components/home/menu/menu-modal";
+
 import menuTempData from "@/data/menu-temp-data.json";
 import tabTempData from "@/data/tab-temp-data.json";
 import boardTempData from "@/data/board-temp-data.json";
-
-const tabs = [
-  { id: 0, name: "전체" },
-  { id: 1, name: "기본 케어" },
-  { id: 2, name: "네일 아트" },
-  { id: 3, name: "젤 네일" },
-  { id: 4, name: "네일 리무버" },
-  { id: 5, name: "스페셜 케어" },
-];
-
-const menus = [];
-
-for (let i = 0; i < 100; i++) {
-  menus.push({
-    id: i,
-    name: `서비스 ${i + 1}`,
-    description: `서비스 ${i + 1} 설명`,
-    menuId: i % 6, // 5개의 다른 탭에 맞춰 순환
-    price: 30000 + i * 1000, // 가격은 예시로 설정
-    color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, // 랜덤 색상
-  });
-}
 
 export default function HomeComponent() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [tabs, setTabs] = useState(tabTempData);
   const [menus, setMenus] = useState(menuTempData);
   const [boardLayout, setBoardLayout] = useState(boardTempData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
+
+  const handleMenuClick = (menuId) => {
+    const menuData = menus.find((menu) => menu.id === menuId);
+    console.log("menuData");
+    console.log(menuData);
+    setModalData(menuData);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="w-screen h-screen overflow-hidden flex">
@@ -56,7 +47,13 @@ export default function HomeComponent() {
           </div>
         </div>
         {selectedTab === 0 ? (
-          <MenuBoard menus={menus} boardLayout={boardLayout} />
+          <MenuBoard
+            menus={menus}
+            boardLayout={boardLayout}
+            onClickMenu={(menuId) => {
+              handleMenuClick(menuId);
+            }}
+          />
         ) : (
           <MenuList menus={menus} selectedTab={selectedTab} />
         )}
@@ -112,6 +109,11 @@ export default function HomeComponent() {
           </div>
         </div>
       </div>
+      <MenuModal
+        isModalOpen={isModalOpen}
+        modalData={modalData}
+        closeModal={closeModal}
+      />
     </div>
   );
 }
