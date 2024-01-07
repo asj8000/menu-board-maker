@@ -8,8 +8,8 @@ export default function MenuBoard({ menus, boardLayout, onClickMenu }) {
           const menuItem = menus.find((menu) => menu.id === item.menuId);
 
           return (
-            <div
-              className="rounded-xl p-4 h-40 flex flex-col justify-between"
+            <button
+              className="rounded-xl p-4 h-40 flex flex-col justify-between text-left"
               key={item.id}
               id={item.id}
               style={{
@@ -38,7 +38,7 @@ export default function MenuBoard({ menus, boardLayout, onClickMenu }) {
                   <p className="font-bold text-base">{item.id}비어있음</p>
                 </div>
               )}
-            </div>
+            </button>
           );
         })}
       </div>
