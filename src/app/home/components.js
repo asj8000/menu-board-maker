@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {useState} from "react";
 
 import MenuList from "@/components/home/menu/menu-list";
 import MenuBoard from "@/components/home/menu/menu-board";
@@ -11,7 +11,7 @@ import tabTempData from "@/data/tab-temp-data.json";
 import boardTempData from "@/data/board-temp-data.json";
 
 export default function HomeComponent() {
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTabId, setSelectedTabId] = useState(0);
   const [tabs, setTabs] = useState(tabTempData);
   const [menus, setMenus] = useState(menuTempData);
   const [boardLayout, setBoardLayout] = useState(boardTempData);
@@ -29,24 +29,24 @@ export default function HomeComponent() {
 
   return (
     <div className="w-screen h-screen overflow-hidden flex">
-      <div className="w-4/6">
-        <div className="p-8 h-1/6">
+      <div className="flex-6">
+        <div className="p-8 h-1/6 border-b">
           <h1 className="text-3xl font-bold">가나다라 네일샵</h1>
           <div className="flex space-x-4 mt-4">
             {tabs.map((tab) => (
-              <div
+              <button
                 key={tab.id}
                 className={`${
-                  selectedTab === tab.id ? "border-b-2 border-black" : ""
+                  selectedTabId === tab.id ? "border-b-2 border-black" : ""
                 }`}
-                onClick={() => setSelectedTab(tab.id)}
+                onClick={() => setSelectedTabId(tab.id)}
               >
                 {tab.name}
-              </div>
+              </button>
             ))}
           </div>
         </div>
-        {selectedTab === 0 ? (
+        {selectedTabId === 0 ? (
           <MenuBoard
             menus={menus}
             boardLayout={boardLayout}
@@ -55,10 +55,15 @@ export default function HomeComponent() {
             }}
           />
         ) : (
-          <MenuList menus={menus} selectedTab={selectedTab} />
+          <MenuList
+            menus={menus}
+            selectedTab={selectedTabId}
+            onClickMenu={(menuId) => {
+              handleMenuClick(menuId);
+            }}/>
         )}
       </div>
-      <div className="w-2/6 bg-[#f5f5f5] p-8 flex flex-col justify-between">
+      <div className="flex-4 bg-[#f5f5f5] p-8 flex flex-col justify-between">
         <div className="mb-4">
           <h2 className="text-xl font-bold">주문</h2>
           <div className="mt-4">

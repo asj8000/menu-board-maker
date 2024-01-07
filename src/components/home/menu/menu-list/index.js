@@ -1,21 +1,25 @@
-export default function MenuList({ menus, selectedTab }) {
+export default function MenuList({ menus, selectedTab, onClickMenu }) {
   return (
     <div className="h-5/6 overflow-y-scroll">
-      <div className="grid grid-cols-4 gap-4 p-4 bg-gray-200 ">
+      <nav className="flex flex-col gap-4">
         {menus
-          .filter((menu) => menu.menuId === selectedTab)
+          .filter((menu) => menu.tabId === selectedTab)
           .map((menu) => (
-            <div
+            <button
               key={menu.id}
-              className="w-full p-4 px-6 border-b border-gray-200"
+              className="w-full p-4 px-6 border-b divide-y-2 border-gray-200 text-left"
+              onClick={() => {
+                onClickMenu(menu.id);
+              }}
             >
               <div>
-                <p>{menu.name}</p>
-                <p className="mt-4">{menu.price}</p>
+                <p className="text-lg">{menu?.name}</p>
+                <p>{menu?.description}</p>
+                <p className="mt-4">{menu?.price} 원</p>
               </div>
-            </div>
+            </button>
           ))}
-      </div>
+      </nav>
     </div>
   );
 }
