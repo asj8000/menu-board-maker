@@ -1,0 +1,48 @@
+[
+  {
+    "menuId": 2,
+    "name": "젤 기본",
+    "price": 40000,
+    "count": 1
+  },
+  {
+    "menuId": 1,
+    "name": "제거",
+    "price": 6000,
+    "count": 1,
+    "parts": [
+      {
+        "subMenuId": 1,
+        "name": "파츠 제거 (500원)",
+        "price": 500,
+        "count": 8
+      },
+      {
+        "subMenuId": 2,
+        "name": "컬러 제거",
+        "price": 1000,
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "아트",
+    "price": 8000,
+    "count": 1,
+    "parts": [
+      {
+        "id": 4,
+        "name": "글리터 추가 2000원",
+        "price": 2000,
+        "count": 4
+      },
+      {
+        "id": 5,
+        "name": "인심 가득",
+        "price": 0,
+        "count": 0
+      }
+    ]
+  }
+]

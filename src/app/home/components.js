@@ -5,17 +5,19 @@ import { useState } from "react";
 import MenuList from "@/components/home/menu/menu-list";
 import MenuBoard from "@/components/home/menu/menu-board";
 import MenuModal from "@/components/home/menu/menu-modal";
+import OrderSummary from "@/components/home/order/order-summary";
 
 import menuTempData from "@/data/menu-temp-data.json";
 import tabTempData from "@/data/tab-temp-data.json";
 import boardTempData from "@/data/board-temp-data.json";
-import OrderSummary from "@/components/home/order/order-summary";
+import orderTempData from "@/data/order-temp-data.json";
 
 export default function HomeComponent() {
   const [selectedTabId, setSelectedTabId] = useState(0);
   const [tabs, setTabs] = useState(tabTempData);
   const [menus, setMenus] = useState(menuTempData);
   const [boardLayout, setBoardLayout] = useState(boardTempData);
+  const [orders, setOrders] = useState(orderTempData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
@@ -64,10 +66,10 @@ export default function HomeComponent() {
         )}
       </div>
       <div className="flex-3 p-6 flex flex-col justify-between border">
-        <OrderSummary order={[]} />
+        <OrderSummary orders={orders} />
         <div>
           <div className="flex items-center justify-between mt-4">
-            <div variant="outline">판매</div>
+            <div variant="outline">편집</div>
             <div className="flex items-center">
               <div variant="outline">-</div>
               <span className="mx-2">1</span>
